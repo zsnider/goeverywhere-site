@@ -366,6 +366,9 @@
     }
     .footer-copy { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--warm); opacity: 0.3; }
 
+    /* ── FILTER HIDE ── */
+    .product-card.card-hidden { display: none !important; }
+
     /* ── SHOPIFY BUY BUTTON OVERRIDES ──
        These ensure Shopify's injected button matches the site style.
        Shopify renders inside .shopify-buy__btn — we override its defaults. */
@@ -495,13 +498,13 @@
     <!-- FILTER BAR -->
     <div class="filter-bar">
       <div class="filter-tabs">
-        <button class="filter-tab active" data-filter="all">All</button>
-        <button class="filter-tab" data-filter="books">Books</button>
-        <button class="filter-tab" data-filter="apparel">Apparel</button>
-        <button class="filter-tab" data-filter="accessories">Accessories</button>
-        <button class="filter-tab" data-filter="digital">Digital</button>
+        <button class="filter-tab active" onclick="filterProducts(this,'all')">All</button>
+        <button class="filter-tab" onclick="filterProducts(this,'books')">Books</button>
+        <button class="filter-tab" onclick="filterProducts(this,'apparel')">Apparel</button>
+        <button class="filter-tab" onclick="filterProducts(this,'accessories')">Accessories</button>
+        <button class="filter-tab" onclick="filterProducts(this,'digital')">Digital</button>
       </div>
-      <span class="filter-note">8 Items</span>
+      <span id="filter-note">8 Items</span>
     </div>
 
     <!-- PRODUCT GRID -->
@@ -904,30 +907,38 @@
   -->
 
   <script>
-    const nav = document.getElementById('main-nav');
-    window.addEventListener('scroll', () => {
+    // Nav scroll
+    var nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', function () {
       nav.classList.toggle('scrolled', window.scrollY > 60);
     }, { passive: true });
 
-    // Filter tabs
-    const tabs = document.querySelectorAll('.filter-tab');
-    const cards = document.querySelectorAll('.product-card[data-category]');
-    const filterNote = document.querySelector('.filter-note');
+    // Filter products by category
+    function filterProducts(btn, filter) {
+      // Update active button
+      var allTabs = document.querySelectorAll('.filter-tab');
+      for (var i = 0; i < allTabs.length; i++) {
+        allTabs[i].classList.remove('active');
+      }
+      btn.classList.add('active');
 
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        const filter = tab.dataset.filter;
-        let visible = 0;
-        cards.forEach(card => {
-          const show = filter === 'all' || card.dataset.category === filter;
-          card.style.display = show ? 'flex' : 'none';
-          if (show) visible++;
-        });
-        filterNote.textContent = visible + (visible === 1 ? ' Item' : ' Items');
-      });
-    });
+      // Show / hide cards
+      var cards = document.querySelectorAll('.product-card[data-category]');
+      var visible = 0;
+      for (var j = 0; j < cards.length; j++) {
+        var cat = cards[j].getAttribute('data-category');
+        if (filter === 'all' || cat === filter) {
+          cards[j].classList.remove('card-hidden');
+          visible++;
+        } else {
+          cards[j].classList.add('card-hidden');
+        }
+      }
+
+      // Update count
+      var note = document.getElementById('filter-note');
+      if (note) note.textContent = visible + (visible === 1 ? ' Item' : ' Items');
+    }
   </script>
 
 </body>
