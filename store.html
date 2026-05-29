@@ -437,9 +437,6 @@
     .page-title   { animation: fadeInUp 1s ease 0.4s both; }
     .page-subtitle { animation: fadeInUp 1s ease 0.55s both; }
 
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
     /* ── RESPONSIVE ── */
     @media (max-width: 960px) {
       nav { padding: 22px 28px; }
@@ -580,7 +577,7 @@
       </div>
 
       <!-- Adventure Cap -->
-      <div class="product-card reveal" data-category="accessories" style="transition-delay: 0.0s">
+      <div class="product-card" data-category="accessories" style="transition-delay: 0.0s">
         <div class="product-image">
           <div class="product-mockup" style="background: linear-gradient(145deg, #120e05 0%, #1e1808 100%);">
             <div class="mockup-icon">🧢</div>
@@ -604,7 +601,7 @@
       </div>
 
       <!-- Logo Tee -->
-      <div class="product-card reveal" data-category="apparel" style="transition-delay: 0.05s">
+      <div class="product-card" data-category="apparel" style="transition-delay: 0.05s">
         <div class="product-image">
           <div class="product-mockup" style="background: linear-gradient(145deg, #0d0d1a 0%, #15152a 100%);">
             <div class="mockup-icon">🌍</div>
@@ -629,7 +626,7 @@
       </div>
 
       <!-- Print -->
-      <div class="product-card reveal" data-category="accessories" style="transition-delay: 0.1s">
+      <div class="product-card" data-category="accessories" style="transition-delay: 0.1s">
         <div class="product-image">
           <img src="photos/shop-lifestyle-2.jpg" alt="Fine Art Print" style="object-position: center;" />
         </div>
@@ -651,7 +648,7 @@
     </div><!-- end product-grid -->
 
     <!-- LIFESTYLE STRIP -->
-    <div class="lifestyle-strip reveal">
+    <div class="lifestyle-strip">
       <div class="lifestyle-panel">
         <img src="photos/card-about.jpg" alt="On the Road" />
         <div class="lifestyle-overlay">
@@ -667,7 +664,7 @@
     </div>
 
     <!-- SHIPPING INFO -->
-    <div class="shipping-band reveal">
+    <div class="shipping-band">
       <div class="shipping-item">
         <svg class="shipping-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
           <rect x="2" y="12" width="24" height="18" rx="1"/><path d="M26 16h4l4 5v9h-8"/><circle cx="9" cy="30" r="3"/><circle cx="29" cy="30" r="3"/>
@@ -698,7 +695,7 @@
     </div>
 
     <!-- PLATFORM NOTICE -->
-    <div class="platform-notice reveal">
+    <div class="platform-notice">
       <div class="notice-icon">🛒</div>
       <div class="notice-content">
         <h3>Store launching soon</h3>
@@ -806,32 +803,21 @@
     // Filter tabs
     const tabs = document.querySelectorAll('.filter-tab');
     const cards = document.querySelectorAll('.product-card[data-category]');
+    const filterNote = document.querySelector('.filter-note');
+
     tabs.forEach(tab => {
       tab.addEventListener('click', () => {
         tabs.forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
         const filter = tab.dataset.filter;
+        let visible = 0;
         cards.forEach(card => {
-          if (filter === 'all' || card.dataset.category === filter) {
-            card.style.display = '';
-          } else {
-            card.style.display = 'none';
-          }
+          const show = filter === 'all' || card.dataset.category === filter;
+          card.style.display = show ? 'flex' : 'none';
+          if (show) visible++;
         });
+        filterNote.textContent = visible + (visible === 1 ? ' Item' : ' Items');
       });
-    });
-
-    // Scroll reveal — threshold 0 fires as soon as 1px is visible
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
-      });
-    }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    // Immediately reveal anything already in the viewport on load
-    document.querySelectorAll('.reveal').forEach(el => {
-      const r = el.getBoundingClientRect();
-      if (r.top < window.innerHeight) el.classList.add('visible');
     });
   </script>
 
