@@ -107,25 +107,11 @@
     .hero-bg {
       position: absolute;
       inset: 0;
-      /* Cinematic gradient placeholder — swap for a real photo/video */
-      background:
-        radial-gradient(ellipse at 60% 40%, #1a2a1a 0%, transparent 60%),
-        radial-gradient(ellipse at 20% 70%, #0e1a2a 0%, transparent 55%),
-        linear-gradient(160deg, #0d1a12 0%, #090909 55%, #12100a 100%);
+      background: url('photos/hero.jpg') center/cover no-repeat;
       transform: scale(1.04);
       transition: transform 8s ease-out;
     }
     .hero:hover .hero-bg { transform: scale(1.0); }
-
-    /* Noise grain overlay */
-    .hero-bg::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      opacity: 0.35;
-      pointer-events: none;
-    }
 
     .hero-overlay {
       position: absolute;
@@ -272,12 +258,12 @@
     }
     .section-card:hover .card-bg { transform: scale(1.06); }
 
-    .card-bg-1 { background: linear-gradient(135deg, #0d1f0f 0%, #1a3520 50%, #0a1a0d 100%); }
-    .card-bg-2 { background: linear-gradient(135deg, #0f1520 0%, #1a2535 50%, #0a1020 100%); }
-    .card-bg-3 { background: linear-gradient(135deg, #201510 0%, #352520 50%, #201008 100%); }
-    .card-bg-4 { background: linear-gradient(135deg, #1a1520 0%, #2a2035 50%, #100f1a 100%); }
-    .card-bg-5 { background: linear-gradient(135deg, #1a1205 0%, #2a2010 50%, #0f0c05 100%); }
-    .card-bg-6 { background: linear-gradient(135deg, #0a1a1a 0%, #102a28 50%, #081510 100%); }
+    .card-bg-1 { background: url('photos/card-photography.jpg') center/cover no-repeat; }
+    .card-bg-2 { background: url('photos/card-videography.jpg') center/cover no-repeat; }
+    .card-bg-3 { background: url('photos/card-about.jpg') center/cover no-repeat; }
+    .card-bg-4 { background: url('photos/card-travel.jpg') center 30%/cover no-repeat; }
+    .card-bg-5 { background: url('photos/card-contact.jpg') center/cover no-repeat; }
+    .card-bg-6 { background: url('photos/card-store.jpg') center/cover no-repeat; }
 
     .card-overlay {
       position: absolute;
@@ -490,7 +476,7 @@
       <li><a href="videography.html">Videography</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="travel.html">Travel</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="contact.html">Work With Us</a></li>
     </ul>
     <a href="store.html" class="nav-store">Shop</a>
   </nav>
@@ -647,7 +633,7 @@
           <h4>Connect</h4>
           <ul>
             <li><a href="travel.html">Travel Planning</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="contact.html">Work With Us</a></li>
             <li><a href="store.html">Shop</a></li>
           </ul>
         </div>
