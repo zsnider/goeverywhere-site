@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Work With Us — Go Everywhere. Do Everything.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #090909;
+      --dark:    #111111;
+      --mid:     #1c1c1c;
+      --border:  #2a2a2a;
+      --muted:   #666666;
+      --warm:    #f5f0e8;
+      --white:   #ffffff;
+      --gold:    #c4a96b;
+      --gold-lt: #d4bb87;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--warm);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 52px;
+      transition: background 0.4s, padding 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(9,9,9,0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 18px 52px;
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--warm);
+      text-decoration: none;
+      line-height: 1.2;
+    }
+    .nav-logo span { display: block; font-size: 0.55rem; font-weight: 400; letter-spacing: 0.35em; color: var(--gold); margin-top: 2px; }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--warm);
+      text-decoration: none;
+      opacity: 0.8;
+      transition: opacity 0.2s, color 0.2s;
+    }
+    .nav-links a:hover,
+    .nav-links a.active { opacity: 1; color: var(--gold); }
+    .nav-store {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--gold);
+      padding: 10px 22px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .nav-store:hover { background: var(--gold-lt); }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      position: relative;
+      height: 70vh;
+      min-height: 480px;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+    .page-hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('photos/work-hero.jpg') center/cover no-repeat;
+    }
+    .page-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(9,9,9,0.2) 0%, rgba(9,9,9,0.75) 100%);
+    }
+    .page-hero-content {
+      position: relative;
+      padding: 0 52px 64px;
+      max-width: 900px;
+    }
+    .page-eyebrow {
+      font-size: 0.62rem;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      opacity: 0.9;
+    }
+    .page-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      font-weight: 300;
+      line-height: 0.95;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+    .page-title em { font-style: italic; color: var(--gold-lt); }
+
+    /* ── MAIN CONTENT ── */
+    .content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 52px;
+    }
+
+    /* ── INTRO ── */
+    .intro-section {
+      padding: 96px 0 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      border-bottom: 1px solid var(--border);
+    }
+    .intro-lead {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--warm);
+      line-height: 1.55;
+    }
+    .intro-lead strong {
+      font-style: normal;
+      font-weight: 600;
+      color: var(--white);
+    }
+    .intro-body {
+      font-size: 0.85rem;
+      line-height: 1.9;
+      color: var(--warm);
+      opacity: 0.7;
+    }
+    .intro-body p + p { margin-top: 20px; }
+
+    /* ── SERVICES ── */
+    .services-section {
+      padding: 80px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 48px;
+      opacity: 0.8;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+    .service-card {
+      background: var(--black);
+      padding: 48px 40px;
+      transition: background 0.3s;
+    }
+    .service-card:hover { background: var(--dark); }
+    .service-num {
+      font-size: 0.58rem;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      margin-bottom: 24px;
+      opacity: 0.6;
+    }
+    .service-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--white);
+      margin-bottom: 8px;
+      line-height: 1.1;
+    }
+    .service-abbr {
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+      opacity: 0.7;
+    }
+    .service-desc {
+      font-size: 0.78rem;
+      line-height: 1.85;
+      color: var(--warm);
+      opacity: 0.65;
+      margin-bottom: 32px;
+    }
+    .service-list {
+      list-style: none;
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+    }
+    .service-list li {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--warm);
+      opacity: 0.55;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .service-list li::before {
+      content: '—';
+      color: var(--gold);
+      opacity: 0.6;
+      flex-shrink: 0;
+    }
+
+    /* ── STATS ── */
+    .stats-section {
+      padding: 72px 0;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+    .stat-item {
+      padding: 0 40px 0 0;
+      border-right: 1px solid var(--border);
+    }
+    .stat-item:first-child { padding-left: 0; }
+    .stat-item:last-child { border-right: none; padding-right: 0; padding-left: 40px; }
+    .stat-item:not(:first-child):not(:last-child) { padding-left: 40px; }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 4vw, 3.8rem);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.0;
+      margin-bottom: 8px;
+    }
+    .stat-num span { color: var(--gold); }
+    .stat-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── CONTACT SECTION ── */
+    .contact-section {
+      padding: 96px 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .contact-left h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+    .contact-left h2 em { font-style: italic; color: var(--gold-lt); }
+    .contact-left p {
+      font-size: 0.8rem;
+      line-height: 1.9;
+      color: var(--warm);
+      opacity: 0.65;
+      margin-bottom: 48px;
+      max-width: 400px;
+    }
+
+    .contact-links { display: flex; flex-direction: column; gap: 0; }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--warm);
+      transition: color 0.2s;
+      group: true;
+    }
+    .contact-link:first-child { border-top: 1px solid var(--border); }
+    .contact-link:hover { color: var(--gold); }
+    .contact-link:hover .link-arrow { transform: translateX(4px); }
+    .link-icon {
+      width: 40px; height: 40px;
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: border-color 0.2s;
+    }
+    .contact-link:hover .link-icon { border-color: var(--gold); }
+    .link-text { flex: 1; }
+    .link-platform {
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 3px;
+    }
+    .link-handle {
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      color: var(--warm);
+      transition: color 0.2s;
+    }
+    .contact-link:hover .link-handle { color: var(--gold); }
+    .link-arrow {
+      transition: transform 0.2s;
+      opacity: 0.4;
+    }
+
+    /* ── FORM ── */
+    .contact-form { display: flex; flex-direction: column; gap: 0; }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      margin-bottom: 1px;
+    }
+    .form-field {
+      background: var(--black);
+      padding: 24px 28px;
+      transition: background 0.2s;
+    }
+    .form-field:focus-within { background: var(--dark); }
+    .form-field.full {
+      grid-column: 1 / -1;
+      background: var(--black);
+    }
+    .form-field.full:focus-within { background: var(--dark); }
+
+    .form-field label {
+      display: block;
+      font-size: 0.58rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.7;
+      margin-bottom: 10px;
+    }
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      width: 100%;
+      background: transparent;
+      border: none;
+      outline: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: var(--warm);
+      letter-spacing: 0.05em;
+    }
+    .form-field input::placeholder,
+    .form-field textarea::placeholder { color: var(--muted); opacity: 0.6; }
+    .form-field select { cursor: pointer; }
+    .form-field select option { background: var(--dark); color: var(--warm); }
+    .form-field textarea { resize: none; height: 120px; line-height: 1.7; }
+
+    .form-submit {
+      margin-top: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .form-note {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 280px;
+    }
+    .btn-submit {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--gold);
+      border: none;
+      padding: 16px 40px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      flex-shrink: 0;
+    }
+    .btn-submit:hover { background: var(--gold-lt); transform: translateY(-1px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      border-top: 1px solid var(--border);
+      padding: 64px 52px 40px;
+    }
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .footer-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.9rem;
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--warm);
+    }
+    .footer-brand span {
+      display: block;
+      font-size: 0.6rem;
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: 0.35em;
+      color: var(--gold);
+      margin-top: 8px;
+      font-weight: 400;
+    }
+    .footer-social { display: flex; gap: 18px; margin-top: 4px; }
+    .footer-social a {
+      width: 38px; height: 38px;
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--warm);
+      opacity: 0.5;
+      text-decoration: none;
+      transition: opacity 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .footer-social a:hover { opacity: 1; border-color: var(--gold); color: var(--gold); }
+    .footer-links { display: flex; gap: 64px; flex-wrap: wrap; }
+    .footer-col h4 {
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 12px; }
+    .footer-col ul a {
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      color: var(--warm);
+      opacity: 0.6;
+      text-decoration: none;
+      transition: opacity 0.2s, color 0.2s;
+    }
+    .footer-col ul a:hover { opacity: 1; color: var(--gold); }
+    .footer-bottom {
+      padding-top: 28px;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-copy { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--warm); opacity: 0.3; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .page-eyebrow { animation: fadeInUp 1s ease 0.2s both; }
+    .page-title   { animation: fadeInUp 1s ease 0.4s both; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      nav { padding: 22px 28px; }
+      nav.scrolled { padding: 14px 28px; }
+      .nav-links { display: none; }
+      .content { padding: 0 28px; }
+      .page-hero-content { padding: 0 28px 48px; }
+      .intro-section { grid-template-columns: 1fr; gap: 36px; padding: 64px 0; }
+      .services-grid { grid-template-columns: 1fr; }
+      .stats-section { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+      .stat-item { border-right: none; padding: 0 !important; }
+      .contact-section { grid-template-columns: 1fr; gap: 56px; padding: 64px 0; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { padding: 40px 28px 28px; }
+      .footer-top { flex-direction: column; gap: 32px; }
+    }
+
+    @media (max-width: 560px) {
+      .form-submit { flex-direction: column; align-items: flex-start; }
+      .btn-submit { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="main-nav">
+    <a href="index.html" class="nav-logo">
+      Go Everywhere<br>Do Everything
+      <span>Journeys to the Edge of the Map</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="photography.html">Photography</a></li>
+      <li><a href="videography.html">Videography</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="travel.html">Travel</a></li>
+      <li><a href="contact.html" class="active">Work With Us</a></li>
+    </ul>
+    <a href="store.html" class="nav-store">Shop</a>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <p class="page-eyebrow">Collaborations &nbsp;·&nbsp; Partnerships &nbsp;·&nbsp; Creative Work</p>
+      <h1 class="page-title">Work<br><em>With Us.</em></h1>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <!-- INTRO -->
+    <div class="intro-section reveal">
+      <p class="intro-lead">
+        We are <strong>Stas & Nick</strong> — two creators making cinematic travel content from the world's most extraordinary places. We work with brands who want <strong>real stories</strong>, not staged ads.
+      </p>
+      <div class="intro-body">
+        <p>With 186 films, 40+ countries, and an audience built on authenticity, we create content that actually connects — because we've lived it. Our work spans everything from off-grid adventures to cultural deep-dives, and we bring that same energy to every brand partnership.</p>
+        <p>Whether you're looking for scroll-stopping UGC, a long-term social media strategy, or editorial-quality photography and video for your campaigns — we'd love to hear from you.</p>
+      </div>
+    </div>
+
+    <!-- SERVICES -->
+    <div class="services-section">
+      <p class="section-label reveal">What We Offer</p>
+      <div class="services-grid">
+
+        <div class="service-card reveal">
+          <p class="service-num">01</p>
+          <h2 class="service-title">User Generated<br>Content</h2>
+          <p class="service-abbr">UGC</p>
+          <p class="service-desc">Authentic, high-converting content created from the road. Shot in real locations, featuring real experiences — the kind of content that earns trust because it's earned honestly.</p>
+          <ul class="service-list">
+            <li>Short-form video (Reels, TikToks, Shorts)</li>
+            <li>Product integration in travel contexts</li>
+            <li>Raw + edited deliverables</li>
+            <li>Usage rights for paid ads</li>
+          </ul>
+        </div>
+
+        <div class="service-card reveal" style="transition-delay: 0.1s">
+          <p class="service-num">02</p>
+          <h2 class="service-title">Social Media<br>Management</h2>
+          <p class="service-abbr">SMM</p>
+          <p class="service-desc">Full-service management of your brand's social presence. We handle content strategy, creation, scheduling, and community engagement — with a travel-forward, cinematic aesthetic.</p>
+          <ul class="service-list">
+            <li>Instagram & TikTok management</li>
+            <li>Content calendar & strategy</li>
+            <li>Community engagement</li>
+            <li>Monthly performance reporting</li>
+          </ul>
+        </div>
+
+        <div class="service-card reveal" style="transition-delay: 0.2s">
+          <p class="service-num">03</p>
+          <h2 class="service-title">Editorial<br>Content</h2>
+          <p class="service-abbr">Editorial</p>
+          <p class="service-desc">Magazine-quality photography and long-form video for brands who want their story told properly. We approach every project like a documentary — with craft, patience, and a real point of view.</p>
+          <ul class="service-list">
+            <li>Cinematic brand films</li>
+            <li>Destination & lifestyle photography</li>
+            <li>Long-form documentary content</li>
+            <li>Full production to post</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-section">
+      <div class="stat-item reveal">
+        <div class="stat-num">186<span>+</span></div>
+        <div class="stat-label">Films Produced</div>
+      </div>
+      <div class="stat-item reveal" style="transition-delay: 0.1s">
+        <div class="stat-num">40<span>+</span></div>
+        <div class="stat-label">Countries Covered</div>
+      </div>
+      <div class="stat-item reveal" style="transition-delay: 0.2s">
+        <div class="stat-num">3<span>+</span></div>
+        <div class="stat-label">Platforms Active</div>
+      </div>
+      <div class="stat-item reveal" style="transition-delay: 0.3s">
+        <div class="stat-num">100<span>%</span></div>
+        <div class="stat-label">Original Content</div>
+      </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="contact-section">
+
+      <!-- Left: links -->
+      <div class="contact-left reveal">
+        <h2>Let's make<br><em>something real.</em></h2>
+        <p>Drop us a message through the form, or reach out directly on any of our platforms. We respond to every serious inquiry within 48 hours.</p>
+
+        <div class="contact-links">
+          <a href="mailto:gedetravels@gmail.com" class="contact-link">
+            <div class="link-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div class="link-text">
+              <div class="link-platform">Email</div>
+              <div class="link-handle">gedetravels@gmail.com</div>
+            </div>
+            <svg class="link-arrow" width="16" height="8" viewBox="0 0 16 8" fill="none"><path d="M1 4H15M11 1L15 4L11 7" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+
+          <a href="https://instagram.com/goeverywhere_doeverything" target="_blank" rel="noopener" class="contact-link">
+            <div class="link-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8 0 3.2 0 3.6-.1 4.8-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1-3.2 0-3.6 0-4.8-.1-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12c0-3.2 0-3.6.1-4.8C2.4 3.9 4 2.3 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zm0-2.2C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1 0 8.3 0 8.7 0 12c0 3.3 0 3.7.1 4.9.2 4.4 2.6 6.8 7 7C8.3 24 8.7 24 12 24c3.3 0 3.7 0 4.9-.1 4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9 0-3.3 0-3.7-.1-4.9C23.7 2.7 21.3.3 16.9.1 15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4A6.2 6.2 0 0 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z"/></svg>
+            </div>
+            <div class="link-text">
+              <div class="link-platform">Instagram</div>
+              <div class="link-handle">@goeverywhere_doeverything</div>
+            </div>
+            <svg class="link-arrow" width="16" height="8" viewBox="0 0 16 8" fill="none"><path d="M1 4H15M11 1L15 4L11 7" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+
+          <a href="https://tiktok.com/@go3verywheredo3verything" target="_blank" rel="noopener" class="contact-link">
+            <div class="link-icon">
+              <svg width="15" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg>
+            </div>
+            <div class="link-text">
+              <div class="link-platform">TikTok</div>
+              <div class="link-handle">@go3verywheredo3verything</div>
+            </div>
+            <svg class="link-arrow" width="16" height="8" viewBox="0 0 16 8" fill="none"><path d="M1 4H15M11 1L15 4L11 7" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+
+          <a href="https://youtube.com/@go_everywhere_do_everything" target="_blank" rel="noopener" class="contact-link">
+            <div class="link-icon">
+              <svg width="16" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.6 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+            </div>
+            <div class="link-text">
+              <div class="link-platform">YouTube</div>
+              <div class="link-handle">@go_everywhere_do_everything</div>
+            </div>
+            <svg class="link-arrow" width="16" height="8" viewBox="0 0 16 8" fill="none"><path d="M1 4H15M11 1L15 4L11 7" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: form -->
+      <div class="contact-form reveal" style="transition-delay: 0.15s">
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+
+          <div style="background: var(--border); display: flex; flex-direction: column; gap: 1px; margin-bottom: 1px;">
+            <div class="form-row">
+              <div class="form-field">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" placeholder="Full name" required />
+              </div>
+              <div class="form-field">
+                <label for="company">Company / Brand</label>
+                <input type="text" id="company" name="company" placeholder="Company name" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-field">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="your@email.com" required />
+              </div>
+              <div class="form-field">
+                <label for="service">Service</label>
+                <select id="service" name="service">
+                  <option value="" disabled selected>What are you interested in?</option>
+                  <option value="ugc">UGC — User Generated Content</option>
+                  <option value="smm">SMM — Social Media Management</option>
+                  <option value="editorial">Editorial Content</option>
+                  <option value="other">Other / Not Sure Yet</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row" style="grid-template-columns: 1fr;">
+              <div class="form-field full">
+                <label for="message">Tell Us About Your Project</label>
+                <textarea id="message" name="message" placeholder="What are you working on? Budget range, timeline, any details that help..."></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-submit">
+            <p class="form-note">We respond to every serious inquiry within 48 hours.</p>
+            <button type="submit" class="btn-submit">Send Message</button>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          Go Everywhere.<br>Do Everything.
+          <span>Stas &amp; Nick · @go_everywhere_do_everything</span>
+        </div>
+        <div class="footer-social" style="margin-top: 28px;">
+          <a href="https://youtube.com/@go_everywhere_do_everything" target="_blank" rel="noopener" title="YouTube">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.6 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+          </a>
+          <a href="https://instagram.com/goeverywhere_doeverything" target="_blank" rel="noopener" title="Instagram">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8 0 3.2 0 3.6-.1 4.8-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1-3.2 0-3.6 0-4.8-.1-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12c0-3.2 0-3.6.1-4.8C2.4 3.9 4 2.3 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zm0-2.2C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1 0 8.3 0 8.7 0 12c0 3.3 0 3.7.1 4.9.2 4.4 2.6 6.8 7 7C8.3 24 8.7 24 12 24c3.3 0 3.7 0 4.9-.1 4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9 0-3.3 0-3.7-.1-4.9C23.7 2.7 21.3.3 16.9.1 15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4A6.2 6.2 0 0 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z"/></svg>
+          </a>
+          <a href="https://tiktok.com/@go3verywheredo3verything" target="_blank" rel="noopener" title="TikTok">
+            <svg width="13" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="photography.html">Photography</a></li>
+            <li><a href="videography.html">Videography</a></li>
+            <li><a href="about.html">About Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="travel.html">Travel Planning</a></li>
+            <li><a href="contact.html">Work With Us</a></li>
+            <li><a href="store.html">Shop</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2025 Go Everywhere Do Everything. All rights reserved.</p>
+      <p class="footer-copy">goeverywheredoeverything.club</p>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
